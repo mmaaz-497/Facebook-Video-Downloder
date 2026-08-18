@@ -1,0 +1,128 @@
+:root {
+  --accent: #1877f2;
+  --danger: #b3261e;
+  --border: #d5d9de;
+  --radius: 10px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: #f0f2f5;
+  color: #1c1e21;
+}
+
+.container {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+}
+
+h1 { font-size: 1.6rem; }
+.tagline { color: #4b4f56; }
+
+#inspect-form {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1.25rem 0;
+}
+
+#url-input {
+  flex: 1;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 1rem;
+}
+
+button {
+  padding: 0.65rem 1.2rem;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--accent);
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+button:disabled {
+  background: #9db8dd;
+  cursor: not-allowed;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.hidden { display: none; }
+
+.error {
+  margin-top: 1rem;
+  padding: 0.8rem 1rem;
+  border-radius: var(--radius);
+  background: #fdeceb;
+  border: 1px solid var(--danger);
+  color: var(--danger);
+}
+
+.error p { margin: 0; }
+
+#retry-button {
+  margin-top: 0.6rem;
+  background: var(--danger);
+}
+
+#video-card { display: flex; gap: 1rem; }
+
+.preview {
+  flex: 0 0 220px;
+  display: flex;
+  align-items: flex-start;
+}
+
+/* aspect-ratio comes from JS via the CSSOM (width / height from the API), so
+   Reels render portrait without letterboxing. */
+#thumbnail {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  object-fit: cover;
+  background: #e4e6eb;
+}
+
+.meta { flex: 1; display: flex; flex-direction: column; gap: 0.5rem; }
+.meta h2 { margin: 0; font-size: 1.1rem; overflow-wrap: anywhere; }
+
+select {
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 1rem;
+}
+
+.progress-track {
+  height: 12px;
+  border-radius: 6px;
+  background: #e4e6eb;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+
+.note { color: #4b4f56; font-size: 0.85rem; }
+
+@media (max-width: 560px) {
+  #video-card { flex-direction: column; }
+  .preview { flex-basis: auto; }
+}

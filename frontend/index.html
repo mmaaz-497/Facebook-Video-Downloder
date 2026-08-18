@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Facebook Video Downloader</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="container">
+    <h1>Facebook Video Downloader</h1>
+    <p class="tagline">
+      Paste the link of a <strong>public</strong> Facebook video or Reel.
+      Private or login-walled videos are not supported — this service never
+      logs in to Facebook.
+    </p>
+
+    <form id="inspect-form" autocomplete="off">
+      <input id="url-input" type="url" required
+             placeholder="https://www.facebook.com/watch?v=…"
+             aria-label="Facebook video URL">
+      <button id="inspect-button" type="submit">Inspect</button>
+    </form>
+
+    <section id="error-area" class="error hidden" role="alert">
+      <p id="error-message"></p>
+      <button id="retry-button" type="button" class="hidden">Try again</button>
+    </section>
+
+    <section id="video-card" class="card hidden">
+      <div class="preview">
+        <img id="thumbnail" alt="Video thumbnail">
+      </div>
+      <div class="meta">
+        <h2 id="video-title"></h2>
+        <p id="video-duration"></p>
+        <label for="resolution-select">Resolution</label>
+        <select id="resolution-select"></select>
+        <button id="download-button" type="button">Download</button>
+      </div>
+    </section>
+
+    <section id="job-area" class="card hidden">
+      <p id="job-state"></p>
+      <div class="progress-track" role="progressbar" aria-valuemin="0"
+           aria-valuemax="100" id="progress-track">
+        <div id="progress-fill" class="progress-fill"></div>
+      </div>
+      <p class="note">Your file downloads automatically when ready. Files are
+        deleted from the server immediately after delivery — download again to
+        get a new copy.</p>
+    </section>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>

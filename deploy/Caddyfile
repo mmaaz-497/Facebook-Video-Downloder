@@ -1,0 +1,12 @@
+# Caddy reverse proxy for fb-video-downloader.
+#
+# Replace example.com with your real domain: Caddy then provisions and renews
+# TLS certificates automatically (ACME/Let's Encrypt) — no further TLS config.
+# The app container listens on 127.0.0.1:8000 (see Dockerfile); keep
+# FORWARDED_ALLOW_IPS on the app pointed at this proxy's address so uvicorn
+# trusts only Caddy's X-Forwarded-For.
+
+example.com {
+	encode gzip
+	reverse_proxy 127.0.0.1:8000
+}

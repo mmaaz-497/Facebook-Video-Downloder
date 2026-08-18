@@ -1,0 +1,24 @@
+# Only backend/{pyproject.toml,app} and frontend/ are COPYed; keep the build
+# context minimal and secret-free regardless.
+.git/
+.gitignore
+.specify/
+.claude/
+history/
+specs/
+deploy/
+Dockerfile
+.dockerignore
+README.md
+
+backend/.venv/
+backend/tests/
+**/__pycache__/
+*.pyc
+*.log
+
+.env
+**/.env
+downloads/
+*.mp4
+*.part
