@@ -37,11 +37,22 @@ class HashedIpFilter(logging.Filter):
         super().__init__()
         self._salt = salt
 
-    def filter(self, record: logging.LogRecord) -> bool:
-        msg = record.getMessage()
-        redacted = _IPV4_RE.sub(
-            lambda m: "ip:" + client_hash(m.group(0), self._salt)[:12], msg
+    def _redact(self, text: str) -> str:
+        return _IPV4_RE.sub(
+            lambda m: "ip:" + client_hash(m.group(0), self._salt)[:12], text
         )
+
+    def filter(self, record: logging.LogRecord) -> bool:
+        # Redact inside a tuple of args rather than flattening them: uvicorn's
+        # access formatter unpacks record.args and crashes if they are None.
+        if isinstance(record.args, tuple):
+            record.args = tuple(
+                self._redact(a) if isinstance(a, str) else a for a in record.args
+            )
+            if isinstance(record.msg, str):
+                record.msg = self._redact(record.msg)
+        msg = record.getMessage()
+        redacted = self._redact(msg)
         if redacted != msg:
             record.msg = redacted
             record.args = None
